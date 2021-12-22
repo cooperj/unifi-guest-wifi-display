@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guest Wifi</title>
+    <link rel="stylesheet" href="static/main.css">
+    <script src="static/qrcode.min.js"></script>   
+</head>
+<body>
+    <div class="page">
+        <main>
+            <div id="creds">
+                <h1>Guest Wifi</h1>
+                <p>
+                    <strong>SSID:</strong> {{ ssid }}
+                </p>
+                
+                <p>
+                    <strong>PWD:</strong> {{ passwd }}
+                </p>
+            </div>
+            
+            <div id="qr">
+                <div id="qrcode"></div>
+                <script type="text/javascript">
+                    const qr_data = `WIFI:S:{{ ssid }};T:WPA;P:{{ passwd }};;`
+                    new QRCode(document.getElementById("qrcode"), qr_data);
+                </script>
+            </div>
+        </main>
+        
+        {% if regen_passwd_enabled %}
+            <div>
+                <form action="/new" method="POST">
+                    <button type="submit">Regenerate Password</button>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
