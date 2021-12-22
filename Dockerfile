@@ -7,8 +7,6 @@ RUN pip3 install requests
 RUN pip3 install Jinja2
 RUN pip3 install python-dotenv
 
-
-
 COPY . .
 
 EXPOSE 5000
