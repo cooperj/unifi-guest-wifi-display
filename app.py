@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, Response
+from flask import Flask, render_template, redirect, Response, send_from_directory
 from requests import status_codes
 from requests.sessions import session
 app = Flask(__name__)
@@ -83,6 +83,11 @@ def ping():
 @app.route("/pingu")
 def pingu():
     return Response("Noot! Noot!", 202)
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 if (os.getenv("ENVIRONMENT") == "prod"):
     # Prod
